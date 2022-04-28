@@ -12,7 +12,7 @@ public class AuthController {
     }
 
     @GetMapping("/signup")
-    public String signup() {
+    public String signUp() {
         return "auth/signup";
     }
 
