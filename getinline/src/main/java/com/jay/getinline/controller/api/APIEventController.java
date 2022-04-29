@@ -1,5 +1,10 @@
 package com.jay.getinline.controller.api;
 
+import com.jay.getinline.constant.ErrorCode;
+import com.jay.getinline.dto.APIErrorResponse;
+import com.jay.getinline.exception.GeneralException;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -8,10 +13,10 @@ import java.util.List;
 @RestController
 public class APIEventController {
 
-    @GetMapping("/evnets")
+    @GetMapping("/events")
     public List<String> getEvents() {
-
-        return List.of("event1", "event2");
+        throw new GeneralException("test message");
+        //return List.of("event1", "event2");
     }
 
     @GetMapping("/{event-id}")
@@ -33,4 +38,7 @@ public class APIEventController {
     public String deleteEvent(@PathVariable String eventId){
         return "";
     }
+
+
+
 }

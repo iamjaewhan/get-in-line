@@ -13,18 +13,18 @@ import java.util.function.Predicate;
 @RequiredArgsConstructor
 public enum ErrorCode {
 
-    OK(0, HttpStatus.OK, "Ok"),
+    OK(0, ErrorCategory.NORMAL, "Ok"),
 
-    BAD_REQUEST(10000, HttpStatus.BAD_REQUEST, "Bad request"),
-    SPRING_BAD_REQUEST(10001, HttpStatus.BAD_REQUEST, "Spring-detected bad request"),
+    BAD_REQUEST(10000, ErrorCategory.CLIENT_SIDE, "Bad request"),
+    SPRING_BAD_REQUEST(10001, ErrorCategory.CLIENT_SIDE, "Spring-detected bad request"),
 
-    INTERNAL_ERROR(20000, HttpStatus.INTERNAL_SERVER_ERROR, "Internal error"),
-    SPRING_INTERNAL_ERROR(20001, HttpStatus.INTERNAL_SERVER_ERROR, "Spring-detected internal error"),
-    DATA_ACCESS_ERROR(20002, HttpStatus.INTERNAL_SERVER_ERROR, "Data access error")
+    INTERNAL_ERROR(20000, ErrorCategory.SERVER_SIDE, "Internal error"),
+    SPRING_INTERNAL_ERROR(20001, ErrorCategory.SERVER_SIDE, "Spring-detected internal error"),
+    DATA_ACCESS_ERROR(20002, ErrorCategory.SERVER_SIDE, "Data access error")
     ;
 
     private final Integer code;
-    private final HttpStatus httpStatus;
+    private final ErrorCategory errorCategory;
     private final String message;
 
 
@@ -49,6 +49,20 @@ public enum ErrorCode {
         return Optional.ofNullable(message)
                 .filter(Predicate.not(String::isBlank))
                 .orElse(this.getMessage());
+    }
+
+    public boolean isClientSideError() {
+        return this.getErrorCategory() == ErrorCategory.CLIENT_SIDE;
+    }
+
+    public boolean isServerSideError() {
+        return this.getErrorCategory() == ErrorCategory.SERVER_SIDE;
+    }
+
+
+
+    private enum ErrorCategory {
+        NORMAL, CLIENT_SIDE, SERVER_SIDE;
     }
 
     @Override
