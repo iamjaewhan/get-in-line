@@ -2,13 +2,16 @@ package com.jay.getinline.controller.api;
 
 import org.springframework.web.bind.annotation.*;
 
-@RequestMapping("/api/events")
+import java.util.List;
+
+@RequestMapping("/api")
 @RestController
 public class APIEventController {
 
-    @GetMapping("/")
-    public String getEventList() {
-        return "";
+    @GetMapping("/evnets")
+    public List<String> getEvents() {
+
+        return List.of("event1", "event2");
     }
 
     @GetMapping("/{event-id}")
