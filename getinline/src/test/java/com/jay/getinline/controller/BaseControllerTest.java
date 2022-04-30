@@ -36,7 +36,8 @@ class BaseControllerTest {
     }
 
     //테스트 직후 수행되는 동작
-    //테스트 네이밍 컨벤션 : test + 해당 메소드명
+    //테스트 네이밍 컨벤션 : test + 해당 메소드명 - but 메소드명은 스펙 : 메소드 명을 따르는 것은 지양
+    //해당 테스트의 목적 판단 불가
     @Test
     void testRoot() throws Exception{
         //given
