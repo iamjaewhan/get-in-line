@@ -5,6 +5,7 @@ import com.jay.getinline.dto.APIErrorResponse;
 import com.jay.getinline.exception.GeneralException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -14,8 +15,8 @@ import java.util.List;
 public class APIEventController {
 
     @GetMapping("/events")
-    public List<String> getEvents() {
-        throw new GeneralException("test message");
+    public List<String> getEvents() throws HttpRequestMethodNotSupportedException {
+        throw new HttpRequestMethodNotSupportedException("response entity exception handler 테스트");
         //return List.of("event1", "event2");
     }
 
