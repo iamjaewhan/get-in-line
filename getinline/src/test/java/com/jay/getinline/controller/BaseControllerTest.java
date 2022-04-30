@@ -36,8 +36,9 @@ class BaseControllerTest {
     }
 
     //테스트 직후 수행되는 동작
+    //테스트 네이밍 컨벤션 : test + 해당 메소드명
     @Test
-    void root() throws Exception{
+    void testRoot() throws Exception{
         //given
 
 
