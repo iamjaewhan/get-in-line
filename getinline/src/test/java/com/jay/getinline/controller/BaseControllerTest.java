@@ -36,8 +36,11 @@ class BaseControllerTest {
     }
 
     //테스트 직후 수행되는 동작
-    //테스트 네이밍 컨벤션 : test + 해당 메소드명 - but 메소드명은 스펙 : 메소드 명을 따르는 것은 지양
+    //테스트 네이밍 컨벤션 1  : test + 해당 메소드
+    //but 메소드명은 스펙 : 메소드 명을 따르는 것은 지양
     //해당 테스트의 목적 판단 불가
+    //테스트 네이밍 컨벤션 2 : 메소드 or 동작 + should + 예상 결과
+    //테스트 네이밍 컨벤션 3 : given + 주어진 환경 +  when + 테스트 동작 + return + 기대 결과
     @Test
     void testRoot() throws Exception{
         //given
