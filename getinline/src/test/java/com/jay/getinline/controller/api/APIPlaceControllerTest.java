@@ -20,21 +20,20 @@ class APIPlaceControllerTest {
 
     private final MockMvc mvc;
 
-
     public APIPlaceControllerTest(@Autowired MockMvc mvc) {
         this.mvc = mvc;
     }
-    @DisplayName("[API][GET] 장소 리스트 조회")
+
+    @DisplayName("[API][GET] lookup place list- when place exsist")
     @Test
-    void givenNoting_whenRequestingPlaces_thenReturnsListOfPlacesInStandardResponse() throws Exception{
+    void givenNothing_whenRequestingPlaces_thenReturnsPlacesInStandardResponse() throws Exception {
         //given
 
         //when&then
         mvc.perform(get("/api/places"))
                 .andExpect(status().isOk())
-                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.data").isArray())
-                .andExpect(jsonPath("$.data[0].placeType").value(PlaceType.COMMON.name()))
                 .andExpect(jsonPath("$.data[0].placeName").value("배드민턴장"))
                 .andExpect(jsonPath("$.data[0].address").value("서울시 강남대로 123길"))
                 .andExpect(jsonPath("$.data[0].phoneNumber").value("010-1234-5678"))
@@ -44,6 +43,8 @@ class APIPlaceControllerTest {
                 .andExpect(jsonPath("$.errorCode").value(ErrorCode.OK.getCode()))
                 .andExpect(jsonPath("$.message").value(ErrorCode.OK.getMessage()));
     }
+
+
 
     @DisplayName("[API][GET] 단일 장소 조회 - 장소 있는 경우")
     @Test
