@@ -3,6 +3,7 @@ package com.jay.getinline.controller.api;
 import com.jay.getinline.constant.PlaceType;
 import com.jay.getinline.dto.APIDataResponse;
 import com.jay.getinline.dto.PlaceDTO;
+import com.jay.getinline.dto.PlaceResponse;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -12,15 +13,14 @@ import java.util.List;
 public class APIPlaceController {
 
     @GetMapping("/places")
-    public APIDataResponse<List<PlaceDTO>> getPlaces() {
-        return  APIDataResponse.of(List.of(PlaceDTO.of(
+    public APIDataResponse<List<PlaceResponse>> getPlaces(){
+        return APIDataResponse.of(List.of((PlaceResponse.of(
                 PlaceType.COMMON,
                 "배드민턴장",
                 "서울시 강남대로 123길",
                 "010-1234-5678",
                 30,
-                "신장개업"
-        )));
+                "신장개업"))));
     }
 
     @PostMapping("/places")
