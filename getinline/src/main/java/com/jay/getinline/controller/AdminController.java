@@ -10,22 +10,23 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class AdminController {
 
     @GetMapping("/places")
-    public String getPlaces() {
-        return "";
+    public String adminPlaces() {
+        return "admin/places";
     }
 
-    @GetMapping("/{place-id}")
-    public String getOnePlace(@PathVariable String placeId) {
-        return "";
+    @GetMapping("/places/{placeId}")
+    public String adminPlaceDetail(@PathVariable Integer placeId) {
+        return "admin/place-detail";
     }
 
     @GetMapping("/events")
-    public String eventList () {
-        return "";
+    public String adminEvents() {
+        return "admin/events";
     }
 
-    @GetMapping("/events/{event-id}")
-    public String getEvent(@PathVariable String eventId) {
-        return "";
+    @GetMapping("/events/{eventId}")
+    public String adminEventDetail(@PathVariable Integer eventId) {
+        return "admin/event-detail";
     }
+
 }

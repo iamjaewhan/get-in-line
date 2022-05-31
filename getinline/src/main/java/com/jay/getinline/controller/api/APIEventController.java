@@ -2,32 +2,33 @@ package com.jay.getinline.controller.api;
 
 import org.springframework.web.bind.annotation.*;
 
-@RequestMapping("/api/events")
+@RequestMapping("/api")
 @RestController
 public class APIEventController {
 
-    @GetMapping("/")
-    public String getEventList() {
-        return "";
+    @GetMapping("/events")
+    public List<String> getEvents() {
+        return List.of("event1", "event2");
     }
 
-    @GetMapping("/{event-id}")
-    public String getEventById(@PathVariable String eventId) {
-        return "";
+    @PostMapping("/events")
+    public Boolean createEvent() {
+        return true;
     }
 
-    @PostMapping("/")
-    public String postEvent(@PathVariable String eventId) {
-        return "";
+    @GetMapping("/events/{eventId}")
+    public String getEvent(@PathVariable Integer eventId) {
+        return "event " + eventId;
     }
 
-    @PutMapping("/{event-id}")
-    public String updateEvent(@PathVariable String eventId){
-        return "";
+    @PutMapping("/events/{eventId}")
+    public Boolean modifyEvent(@PathVariable Integer eventId) {
+        return true;
     }
 
-    @DeleteMapping("/{event-id}")
-    public String deleteEvent(@PathVariable String eventId){
-        return "";
+    @DeleteMapping("/events/{eventId}")
+    public Boolean removeEvent(@PathVariable Integer eventId) {
+        return true;
     }
+
 }

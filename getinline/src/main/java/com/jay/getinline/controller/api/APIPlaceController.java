@@ -2,22 +2,36 @@ package com.jay.getinline.controller.api;
 
 import org.springframework.web.bind.annotation.*;
 
-@RequestMapping("/api/places")
+import java.util.List;
+
+
+@RequestMapping("/api")
 @RestController
 public class APIPlaceController {
 
-    @GetMapping("/")
-    public String placelist() {
-        return "";
+    @GetMapping("/places")
+    public List<String> getPlaces() {
+        return List.of("place1", "place2");
     }
 
-    @GetMapping("/{place_id}")
-    public String getPlaces(@PathVariable String place_id) {
-        return "";
+    @PostMapping("/places")
+    public Boolean createPlace() {
+        return true;
     }
 
-    @PutMapping("/")
-    public String postPlaces(@PathVariable String place_id){
-        return "";
+    @GetMapping("/places/{placeId}")
+    public String getPlace(@PathVariable Integer placeId) {
+        return "place " + placeId;
     }
+
+    @PutMapping("/places/{placeId}")
+    public Boolean modifyPlace(@PathVariable Integer placeId) {
+        return true;
+    }
+
+    @DeleteMapping("/places/{placeId}")
+    public Boolean removePlace(@PathVariable Integer placeId) {
+        return true;
+    }
+
 }

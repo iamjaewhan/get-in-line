@@ -9,14 +9,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class APIAuthController {
 
-    @GetMapping("/signup")
+    @GetMapping("/sign-up")
     public String signUp() {
-        return "done";
+        return "done.";
     }
 
     @GetMapping("/login")
     public String login() {
-        return "done";
+        return "done.";
     }
 
 }
