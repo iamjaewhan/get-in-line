@@ -9,14 +9,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class BaseController  {
 
     @GetMapping("/")
-    public String root() throws Exception {
-        throw new  Exception("test");
-//        return "index";
-    }
+    public String root()  {
 
-//    @RequestMapping("/error")
-//    public String error() {
-//        return "error";
-//    }
+        return "index";
+    }
 
 }
