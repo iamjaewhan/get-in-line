@@ -42,3 +42,16 @@ public record EventDTO(
         );
     }
 }
+
+//    public static EventDTO of(
+//            long eventId,
+//            String eventName,
+//            EventStatus eventStatus,
+//            LocalDateTime eventStartDatetime,
+//            LocalDateTime eventEndDatetime,
+//
+//    )
+//    {
+//        return new EventDTO(eventId, eventName, eventStatus, eventStartDatetime, eventEndDatetime);
+//    }
+//}
