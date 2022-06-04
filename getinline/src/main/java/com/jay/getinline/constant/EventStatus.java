@@ -1,5 +1,5 @@
 package com.jay.getinline.constant;
 
 public enum EventStatus {
-    PENDING, OPEN, CLOSED, CANCELLED, ABORTED;
+    PENDING, OPENED, CLOSED, CANCELLED, ABORTED;
 }
