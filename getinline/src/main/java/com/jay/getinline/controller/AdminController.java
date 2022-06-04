@@ -1,12 +1,16 @@
 package com.jay.getinline.controller;
 
+import com.jay.getinline.DTO.EventDTO;
+import com.jay.getinline.constant.EventStatus;
 import com.jay.getinline.constant.PlaceType;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -33,13 +37,35 @@ public class AdminController {
     }
 
     @GetMapping("/events")
-    public String adminEvents() {
-        return "admin/events";
+    public ModelAndView adminEvents(
+            Long placeId,
+            String placeName,
+            String eventName,
+            EventStatus eventStatus,
+            @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime eventStartDatetime,
+            @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime eventEndDatetime
+    ) {
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("placeName", "place-" + placeId);
+        return new ModelAndView("admin/events", map);
     }
 
     @GetMapping("/events/{eventId}")
-    public String adminEventDetail(@PathVariable Integer eventId) {
-        return "admin/event-detail";
-    }
+    public ModelAndView adminEventDetail(@PathVariable Long eventId) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("event", EventDTO.of(
+                1L,
+                "오후 운동",
+                EventStatus.OPENED,
+                LocalDateTime.of(2021, 1, 1, 13, 0, 0),
+                LocalDateTime.of(2021, 1, 1, 16, 0, 0),
+                0,
+                24,
+                "마스크 꼭 착용하세요",
+                LocalDateTime.now(),
+                LocalDateTime.now()
+        ));
 
+        return new ModelAndView("admin/event-detail", map);
+    }
 }

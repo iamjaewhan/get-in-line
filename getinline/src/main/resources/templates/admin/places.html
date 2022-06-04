@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">>
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -7,9 +7,9 @@
 <body>
 <p>this is places page</p>
 <ul>
-    <li>placeType : <span th:text="${placeType} ?  : _"></span></li>
-    <li>placeName : <span th:text="${placeName} ?  : _"></span></li>
-    <li>addresss : <span th:text="${address} ? : _"></span></li>
+    <li>placeType : <span th:text="${placeType} ?: _">?</span></li>
+    <li>placeName : <span th:text="${placeName} ?: _">?</span></li>
+    <li>addresss : <span th:text="${address} ?: _">?</span></li>
 </ul>
 
 </body>
