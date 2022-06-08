@@ -1,7 +1,9 @@
 package com.jay.getinline.service;
 
 import com.jay.getinline.DTO.EventDTO;
+import com.jay.getinline.constant.ErrorCode;
 import com.jay.getinline.constant.EventStatus;
+import com.jay.getinline.exception.GeneralException;
 import com.jay.getinline.repository.EventRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -17,7 +19,9 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.catchThrowable;
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.BDDMockito.then;
 import static org.mockito.Mockito.verify;
@@ -92,6 +96,23 @@ class EventServiceTest {
 //        verify(eventRepository).findEvents(null, null, null, null, null); //위의 then 문과 같은 동작
     }
 
+    @DisplayName("검색 조건 없이 이벤트 검색, 에러 발생한 경우 기본 에러로 전환하여 에러 던진다,")
+    @Test
+    void givenDataRelatedException_whenSearchingEvents_thenReturnsGeneralException(){
+        //Given
+        RuntimeException e = new RuntimeException("This is test");
+        given(eventRepository.findEvents(any(), any(), any(), any(), any())).willThrow(e);
+
+        //When
+        Throwable thrown = catchThrowable(() -> sut.getEvents(null, null, null, null, null));
+
+        //Then
+        assertThat(thrown)
+                .isInstanceOf(GeneralException.class)
+                .hasMessageContaining(ErrorCode.DATA_ACCESS_ERROR.getMessage());
+        then(eventRepository).should().findEvents(any(), any(), any(), any(), any());
+    }
+
     @DisplayName("검색 조건으로 이벤트 검색, 이벤트 검색 결과 목록 출력")
     @Test
     void givenSearchingParams_whenSearchingEvents_thenReturnsEventsList(){
@@ -124,6 +145,7 @@ class EventServiceTest {
         then(eventRepository).should().findEvents(placeId, eventName, eventStatus, eventStartDatetime, eventEndDatetime);
     }
 
+
     @DisplayName("이벤트 ID로 존재하는 이벤트를 조회하면, 해당 이벤트 정보를 출력하여 보여준다.")
     @Test
     void givenEventId_whenSearchingExistingEvent_thenReturnsEvent() {
@@ -140,6 +162,8 @@ class EventServiceTest {
         then(eventRepository).should().findEvent(eventId);
 
     }
+
+
 
     @DisplayName("이벤트 ID로 이벤트를 조회하면, 빈 정보를 출력하여 보여준다.")
     @Test
