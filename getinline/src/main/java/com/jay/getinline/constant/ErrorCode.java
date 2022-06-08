@@ -28,7 +28,7 @@ public enum ErrorCode {
 
 
     public String getMessage(Exception e) {
-        return getMessage(this.getMessage() + "-" + e.getMessage());
+        return getMessage(this.getMessage() + " - " + e.getMessage());
     }
 
     public String getMessage(String message) {
