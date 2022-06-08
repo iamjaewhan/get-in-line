@@ -25,7 +25,7 @@ class ErrorCodeTest {
         //When
         String actual = errorCode.getMessage(e);
         //parameterized test
-        
+
         //Then
         assertThat(actual).isEqualTo(expected);
     }
@@ -39,6 +39,43 @@ class ErrorCodeTest {
                 arguments(ErrorCode.INTERNAL_ERROR, "internal error - This is test message"),
                 arguments(ErrorCode.SPRING_INTERNAL_ERROR, "Spring-detected internal error - This is test message")
         );
+    }
+
+    @ParameterizedTest
+    @MethodSource
+    @DisplayName("에러 메세지를 받으면, 예외 메세지 포함된 메세지 출력")
+    void givenErrorMessage_whenGettingMessage_thenReturnsMessage(String input, String expected) {
+        //Given
+
+        //When
+        String actual = ErrorCode.INTERNAL_ERROR.getMessage(input);
+        //parameterized test
+
+        //Then
+        assertThat(actual).isEqualTo(expected);
+    }
+
+    static Stream<Arguments> givenErrorMessage_whenGettingMessage_thenReturnsMessage(){
+        return Stream.of(
+                arguments(null, ErrorCode.INTERNAL_ERROR.getMessage()),
+                arguments("", ErrorCode.INTERNAL_ERROR.getMessage()),
+                arguments("   ", ErrorCode.INTERNAL_ERROR.getMessage()),
+                arguments("This is test message", "This is test message" )
+
+        );
+    }
+
+    @DisplayName("toString() 호출 포맷")
+    @Test
+    void givenErrorCode_whenToString_thenReturnsSimplifiedToString(){
+        //Given
+
+
+        //When
+        String result = ErrorCode.INTERNAL_ERROR.toString();
+
+        //Then
+        assertThat(result).isEqualTo("INTERNAL_ERROR (20000)");
     }
 
 }

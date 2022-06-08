@@ -21,8 +21,14 @@ import java.util.Map;
 @RestControllerAdvice(annotations = RestController.class)
 public class APIExceptionHandler extends ResponseEntityExceptionHandler {
 
+//    @ExceptionHandler
+//    public ResponseEntity<Object> validation(ConstraintViolationException e, WebRequest request) {
+//        //return callSuperInternalExceptionHandler(e, ErrorCode.VALIDATION_ERROR, HttpHeaders.EMPTY, HttpStatus.BAD_REQUEST, request);
+//        return handleExceptionInternal(e, ErrorCode.VALIDATION_ERROR, HttpHeaders.EMPTY, HttpStatus.BAD_REQUEST, request);
+//    }
+
     @ExceptionHandler
-    public ResponseEntity<Object> general(ConstraintViolationException e, WebRequest request) {
+    public ResponseEntity<Object> validation(ConstraintViolationException e, WebRequest request) {
         ErrorCode errorCode = ErrorCode.VALIDATION_ERROR;
         HttpStatus status = HttpStatus.BAD_REQUEST;
 
